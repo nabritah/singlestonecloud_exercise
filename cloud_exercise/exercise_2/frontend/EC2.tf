@@ -116,7 +116,7 @@ resource "aws_instance" "yt_webserver_instance" {
     ami = "ami-0747bdcabd34c712a"
     instance_type = "t2.micro"
     availability_zone = "us-east-1a"
-    key_name = "aws.pem"
+    key_name = "pair_name"
 
     network_interface {
         device_index = 0
@@ -155,14 +155,14 @@ resource "aws_instance" "yt_webserver_instance" {
     connection {
       type = "ssh"
       user = "ubuntu"
-      private_key = "${file("/Applications/aws.pem")}"
+      private_key = "${file("/path_to_private_key_file")}"
       host = self.public_ip
     
       #timeout = "2m"
     } 
 
     provisioner "file" {
-      source = "/Applications/index.html"
+      source = "/path_to_index.html_file"
       destination = "/var/www/html/index.html" 
     }
   
